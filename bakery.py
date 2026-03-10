@@ -2,6 +2,7 @@ import random
 import smtplib
 from datetime import date
 import time
+from email.message import EmailMessage
 
 def total(a):
     total=0
@@ -20,13 +21,32 @@ def total(a):
             total+=a[key]*100
     return total
 
-def mail(a,b):
-    b=str(b)
-    msg="Here's the OTP to confirm your order: "+b
-    server=smtplib.SMTP('smtp.gmail.com',587)
+
+
+def mail(a, b):
+    b = str(b)
+    msg = EmailMessage()
+    msg['Subject'] = 'Fresh Out the Oven: Your Confirmation Code 🧁'
+    msg['From'] = 'YOUR EMAIL'
+    msg['To'] = a
+    
+    content = f"""Hello!
+    
+Thanks for choosing us. We're firing up the ovens and getting your order ready.
+    
+To confirm your order, please use the following secure OTP: 
+    
+[ {b} ]
+    
+Keep this code safe, and we'll have your items ready shortly!"""
+    
+    msg.set_content(content)
+    
+    server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login('YOUR EMAIL','YOUR PASS')
-    server.sendmail('YOUR EMAIL',a,b)
+    server.login('YOUR EMAIL', 'YOUR PASS')
+    server.send_message(msg)
+    server.quit()
     
 
 def order():
@@ -166,4 +186,3 @@ choice=int(input("Enter your choice number: "))
 if choice==1:
     print("You have chosen 'Order' ")
     x = order()
-
