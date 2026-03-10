@@ -25,8 +25,8 @@ def mail(a,b):
     msg="Here's the OTP to confirm your order: "+b
     server=smtplib.SMTP('smtp.gmail.com',587)
     server.starttls()
-    server.login('bakerypython@gmail.com','hofi iiof yrek widn')
-    server.sendmail('bakerypython@gmail.com',a,b)
+    server.login('YOUR EMAIL','YOUR PASS')
+    server.sendmail('YOUR EMAIL',a,b)
     
 
 def order():
@@ -166,3 +166,4 @@ choice=int(input("Enter your choice number: "))
 if choice==1:
     print("You have chosen 'Order' ")
     x = order()
+
